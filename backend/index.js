@@ -34,6 +34,10 @@ app.use(session({
   }
 }));
 
+app.get('/', (req, res){
+  res.send({message: "Hello"})
+})
+
 function formatDate(date) {
   const d = new Date(date);
   const year = d.getFullYear();
