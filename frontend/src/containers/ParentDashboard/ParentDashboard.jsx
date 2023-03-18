@@ -18,7 +18,7 @@ const ParentDashboard = () => {
 
   useEffect(() => {
     // checks if user is logged in
-    axios.get("http://localhost:3001/login").then((response) => {
+    axios.get("https://yss-backend.herokuapp.com/login").then((response) => {
       if (response.data.loggedIn) {
         console.log(response);
         setParentID(response.data.user.user_id);
@@ -30,7 +30,7 @@ const ParentDashboard = () => {
 
   useEffect(() => {
     axios
-      .post("http://localhost:3001/parentdashboard", { parent_id: parentID })
+      .post("https://yss-backend.herokuapp.com/parentdashboard", { parent_id: parentID })
       .then((response) => {
         console.log(response);
         setYouthInfo(response.data.youthInfo);

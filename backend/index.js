@@ -18,7 +18,7 @@ const PORT = process.env.PORT || 3001;
 const app = express();
 app.use(express.json());
 app.use(cors({
-  origin: ["http://localhost:3000"],
+  origin: ["https://youthspiritualsummit.netlify.app/"],
   methods: ["GET", "POST"],
   credentials: true
 }));
@@ -172,7 +172,7 @@ app.post("/sendConfirmEmail", (req, res) => {
   Please feel free to get in touch with us at youthspiritualsummit@gmail.com if you are encountering any issues.</p>
   <p>Warm Regards,</p>
   <p>The Youth Spiritual Summit Registration Team</p>
-  <a href="http://localhost:3000"><img width="200px" src="cid:logo"></a>`
+  <a href="https://youthspiritualsummit.netlify.app/"><img width="200px" src="cid:logo"></a>`
   const emailSubject = "Youth Spiritual Summit Account Registration"
 
   mail.authorize().then((auth) => {
@@ -203,7 +203,7 @@ app.post("/youthEmail", (req, res) => {
       if you or your youth are encountering any issues.</p>
       <p>Warm Regards,</p>
       <p>The Youth Spiritual Summit Registration Team</p>
-      <a href="http://localhost:3000"><img width="200px" src="cid:logo"></a>`
+      <a href="https://youthspiritualsummit.netlify.app/"><img width="200px" src="cid:logo"></a>`
       const emailSubject = "Welcome to Youth Spiritual Summit"
 
       mail.authorize().then((auth) => {

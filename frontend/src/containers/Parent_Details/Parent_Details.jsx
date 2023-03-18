@@ -32,7 +32,7 @@ const Parent_Details = () => {
 
   useEffect(() => {
     // checks if user is logged in
-    Axios.get("http://localhost:3001/login").then((response) => {
+    Axios.get("https://yss-backend.herokuapp.com/login").then((response) => {
       if (response) {
         console.log(response);
         if (response.data.loggedIn) {
@@ -130,7 +130,7 @@ const Parent_Details = () => {
       setErrors(newErrors);
     } else {
       e.preventDefault();
-      Axios.post("http://localhost:3001/parentDetails", {
+      Axios.post("https://yss-backend.herokuapp.com/parentDetails", {
         parentID: parentID,
         parentBirthday: parentBirthday,
         parentPhone: parentPhone,

@@ -17,7 +17,7 @@ const Financial_Aid = () => {
   const [balance, setBalance] = useState(0);
 
   useEffect(() => {
-    Axios.post("http://localhost:3001/payment", { balance }).then(
+    Axios.post("https://yss-backend.herokuapp.com/payment", { balance }).then(
       (response) => {
         setBalance(response.data.balance);
       }
@@ -25,7 +25,7 @@ const Financial_Aid = () => {
   });
 
   const insertFinancial_aid = () => {
-    Axios.post("http://localhost:3001/financial_aid", {
+    Axios.post("https://yss-backend.herokuapp.com/financial_aid", {
       household: household,
       income: income,
       total: total,

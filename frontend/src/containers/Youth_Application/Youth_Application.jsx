@@ -30,7 +30,7 @@ const Youth_Application = () => {
 
   useEffect(() => {
     // checks if user is logged in
-    axios.get("http://localhost:3001/login").then((response) => {
+    axios.get("https://yss-backend.herokuapp.com/login").then((response) => {
       if (response) {
         console.log(response);
         if (response.data.loggedIn) {
@@ -91,7 +91,7 @@ const Youth_Application = () => {
     if (Object.keys(newErrors).length > 0) {
       setErrors(newErrors);
     } else {
-      Axios.post("http://localhost:3001/checkEmail", {
+      Axios.post("https://yss-backend.herokuapp.com/checkEmail", {
         email: form.email,
       }).then((response) => {
         console.log(response.data.message);
@@ -105,14 +105,14 @@ const Youth_Application = () => {
   };
 
   const enterYouth = () => {
-    Axios.post("http://localhost:3001/register", {
+    Axios.post("https://yss-backend.herokuapp.com/register", {
       email: form.email,
       password: form.birthday,
       first_name: form.firstName,
       last_name: form.lastName,
       account_type: "youth",
     }).then(() => {
-      Axios.post("http://localhost:3001/youth", {
+      Axios.post("https://yss-backend.herokuapp.com/youth", {
         firstName: form.firstName,
         lastName: form.lastName,
         birthday: form.birthday,
@@ -122,7 +122,7 @@ const Youth_Application = () => {
         phone: form.phone,
         parentID: parentID,
       }).then((response) => {
-        Axios.post("http://localhost:3001/youthEmail", {
+        Axios.post("https://yss-backend.herokuapp.com/youthEmail", {
             parentID: parentID,
             firstName: form.firstName,
             lastName: form.lastName,
