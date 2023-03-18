@@ -30,7 +30,7 @@ const LoginForm = () => {
       };
 
     const login = () => {
-        Axios.post('https://yss-backend.herokuapp.com/login', {
+        Axios.post('/api/login', {
             email: loginEmail,
             password: loginPassword
         }).catch((error) => {
