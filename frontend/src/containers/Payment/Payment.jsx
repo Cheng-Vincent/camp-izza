@@ -15,7 +15,7 @@ const Payment = () => {
 
   useEffect(() => {
     // checks if user is logged in
-    Axios.get("https://yss-backend.herokuapp.com/login").then((response) => {
+    Axios.get("/api/login").then((response) => {
       if (response) {
         console.log(response);
         if (response.data.loggedIn) {
@@ -28,7 +28,7 @@ const Payment = () => {
   }, []);
 
   useEffect(() => {
-    Axios.post("https://yss-backend.herokuapp.com/payment", { parent_id: parentID })
+    Axios.post("/api/payment", { parent_id: parentID })
       .then((response) => {
         // console.log("getting balance from backend");
         // console.log(response.data.balance);
@@ -65,7 +65,7 @@ const Payment = () => {
   const onApprove = (data, actions) => {
     //console.log(balance);
     console.log("approved");
-    Axios.post("https://yss-backend.herokuapp.com/updPayment");
+    Axios.post("/api/updPayment");
     return actions.order.capture().then(function (details) {
       const { payer } = details;
       setSuccess(true);

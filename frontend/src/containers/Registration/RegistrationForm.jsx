@@ -44,7 +44,7 @@ const RegistrationForm = () => {
         if (Object.keys(newErrors).length > 0) {
             setErrors(newErrors);
         } else {
-            Axios.post('https://yss-backend.herokuapp.com/checkEmail', {
+            Axios.post('/api/checkEmail', {
                 email: form.email
             }).then((response) => {
                 console.log(response);
@@ -58,7 +58,7 @@ const RegistrationForm = () => {
     }
 
     const register = () => {
-        Axios.post('https://yss-backend.herokuapp.com/register', {
+        Axios.post('/api/register', {
             email: form.email,
             password: form.password,
             first_name: form.firstName,
@@ -73,7 +73,7 @@ const RegistrationForm = () => {
     };
 
     const sendConfirmEmail = () => {
-        Axios.post('https://yss-backend.herokuapp.com/sendConfirmEmail', {
+        Axios.post('/api/sendConfirmEmail', {
             email: form.email,
             name: form.firstName + form.lastName,
             account_type: "parent"
