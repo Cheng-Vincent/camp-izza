@@ -34,7 +34,7 @@ app.use(session({
   }
 }));
 
-app.get('/', (req, res){
+app.get('/', (req, res) => {
   res.send({message: "Hello"})
 })
 
