@@ -147,8 +147,9 @@ const Parent_Details = () => {
         insuranceHolder: insuranceHolder,
         insuranceNumber: insuranceNumber,
       }).then(() => {
-        navigate("/parentdashboard");
+
       });
+      navigate("/parentdashboard");
     }
   };
 
