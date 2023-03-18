@@ -1,0 +1,28 @@
+* {
+  font-family: 'Poppins', sans-serif;
+}
+
+html, body {
+  height: 100%;
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+}
+
+.container {
+  flex: 1;
+}
+
+footer {
+  bottom: 0;
+  width: 100%;
+}
+
+/*.logo {
+    width: 100px;
+    height: 75px;
+    object-fit: scale-down;
+}*/

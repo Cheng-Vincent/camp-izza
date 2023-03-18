@@ -1,0 +1,37 @@
+
+
+.login-container {
+    background-color: #e2e4ee;
+    padding: 5%;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 1%;
+    align-items: center;
+    /*display: flex;*/
+}
+
+.logo-col {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.login-error-message {
+    text-align: center;
+    color: red;
+}
+
+
+.login-button {
+    background-color: #4a5994;
+    color: white;
+}
+
+.register-button {
+    background-color: white;
+    color: #4a5994;
+    --bs-btn-hover-color: #4a5994;
+    --bs-btn-hover-bg: white;
+}
+

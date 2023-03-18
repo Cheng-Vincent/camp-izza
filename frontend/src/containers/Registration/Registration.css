@@ -1,0 +1,34 @@
+.registration-container {
+  background-color: #e2e4ee;
+  padding: 5%;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 3%;
+  align-items: center;
+  margin-top: 90px;
+  margin-bottom: 50px;
+}
+
+.logo-col {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.registration-button {
+  background-color: #4a5994;
+  color: white;
+}
+
+.returning-button {
+  background-color: white;
+  color: #4a5994;
+  --bs-btn-hover-color: #4a5994;
+  --bs-btn-hover-bg: white;
+}
+
+.error-msg {
+  text-align: center;
+  color: red;
+}
