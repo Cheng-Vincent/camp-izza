@@ -1,2 +1,2 @@
-/api/* https://yss-backend.herokuapp.com/ 200
+/api/* https://yss-backend.herokuapp.com/:splat 200
 /* /index.html 200
