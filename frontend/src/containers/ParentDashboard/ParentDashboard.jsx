@@ -123,7 +123,7 @@ const ParentDashboard = () => {
         {/*</div>*/}
 
         {/*I want to keep this for now */}
-        <Card className="mb-4 mx-auto" visible={false}>
+        <Card className="mb-4 mx-auto">
               <Card.Body>
                 <Card.Title>TO-DO: Complete parent details form</Card.Title>
                 <Button variant="danger" type="link" href="parentdetails">Complete</Button>

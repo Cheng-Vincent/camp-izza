@@ -144,6 +144,7 @@ const Youth_Application = () => {
         phone: form.phone,
         parentID: parentID,
       }).then((response) => {
+        alert("Youth added!");
         navigate("/parentdashboard");
         // Axios.post("/api/youthEmail", {
         //     parentID: parentID,
@@ -201,7 +202,7 @@ const Youth_Application = () => {
                   type="name"
                   placeholder="Enter Youth First Name"
                   onChange={(e) => {
-                    setField("firstName", e.target.value);
+                    setField("firstName", e.target.value.trim());
                     // if (!!errors.firstName) setErrors({
                     //     ...errors,
                     //     [firstName]: null
@@ -221,7 +222,7 @@ const Youth_Application = () => {
                   type="name"
                   placeholder="Enter Youth Last Name"
                   onChange={(e) => {
-                    setField("lastName", e.target.value);
+                    setField("lastName", e.target.value.trim());
                     // if (!!errors.lastName) setErrors({
                     //     ...errors,
                     //     lastName: null
@@ -363,7 +364,7 @@ const Youth_Application = () => {
               type="email"
               placeholder="Enter Youth Email"
               onChange={(e) => {
-                setField("email", e.target.value);
+                setField("email", e.target.value.trim());
                 // if (!!errors.email) setErrors({
                 //     ...errors,
                 //     email: null

@@ -226,6 +226,7 @@ const Parent_Details = () => {
         insuranceHolder: insuranceHolder,
         insuranceNumber: insuranceNumber,
       }).then(() => {
+        alert("Form submitted! If you submit another form, it will override this form's submission.");
         navigate("/parentdashboard");
       });
     }
@@ -289,7 +290,7 @@ const Parent_Details = () => {
                 type="name"
                 placeholder="Enter Address Street"
                 onChange={(e) => {
-                  setStreet(e.target.value);
+                  setStreet(e.target.value.trim());
                   if (!!errors.street)
                     setErrors({
                       ...errors,
@@ -312,7 +313,7 @@ const Parent_Details = () => {
                   type="city"
                   placeholder="Enter Address City"
                   onChange={(e) => {
-                    setCity(e.target.value);
+                    setCity(e.target.value.trim());
                     if (!!errors.city)
                       setErrors({
                         ...errors,
@@ -334,7 +335,7 @@ const Parent_Details = () => {
                   type="zip"
                   placeholder="Enter Address Zip Code"
                   onChange={(e) => {
-                    setZip(e.target.value);
+                    setZip(e.target.value.trim());
                     if (!!errors.zip)
                       setErrors({
                         ...errors,
@@ -358,7 +359,7 @@ const Parent_Details = () => {
                   type="ec1"
                   placeholder="Enter Name"
                   onChange={(e) => {
-                    setec1Name(e.target.value);
+                    setec1Name(e.target.value.trim());
                     if (!!errors.ec1)
                       setErrors({
                         ...errors,
@@ -380,7 +381,7 @@ const Parent_Details = () => {
                   type="ec1Phone"
                   placeholder="Enter Phone Number"
                   onChange={(e) => {
-                    setec1Phone(e.target.value);
+                    setec1Phone(e.target.value.trim());
                     if (!!errors.ec1phone)
                       setErrors({
                         ...errors,
@@ -402,7 +403,7 @@ const Parent_Details = () => {
                   type="ec1Relation"
                   placeholder="Relation to Youth"
                   onChange={(e) => {
-                    setec1Relation(e.target.value);
+                    setec1Relation(e.target.value.trim());
                     if (!!errors.ec1Relation)
                       setErrors({
                         ...errors,
@@ -426,7 +427,7 @@ const Parent_Details = () => {
                   type="ec2"
                   placeholder="Enter Name"
                   onChange={(e) => {
-                    setec2Name(e.target.value);
+                    setec2Name(e.target.value.trim());
                     if (!!errors.ec2)
                       setErrors({
                         ...errors,
@@ -448,7 +449,7 @@ const Parent_Details = () => {
                   type="ec2Phone"
                   placeholder="Enter Phone Number"
                   onChange={(e) => {
-                    setec2Phone(e.target.value);
+                    setec2Phone(e.target.value.trim());
                     if (!!errors.ec2phone)
                       setErrors({
                         ...errors,
@@ -470,7 +471,7 @@ const Parent_Details = () => {
                   type="ec2Relation"
                   placeholder="Relation to Youth"
                   onChange={(e) => {
-                    setec2Relation(e.target.value);
+                    setec2Relation(e.target.value.trim());
                     if (!!errors.ec2Relation)
                       setErrors({
                         ...errors,
@@ -497,7 +498,7 @@ const Parent_Details = () => {
                   type="insuranceprovider"
                   placeholder="Enter Insurance Provider"
                   onChange={(e) => {
-                    setInsurance(e.target.value);
+                    setInsurance(e.target.value.trim());
                     if (!!errors.insuranceProvider)
                       setErrors({
                         ...errors,
@@ -519,7 +520,7 @@ const Parent_Details = () => {
                   type="insurancenumber"
                   placeholder="Enter Policy Number"
                   onChange={(e) => {
-                    setInsuranceNumber(e.target.value);
+                    setInsuranceNumber(e.target.value.trim());
                     if (!!errors.insuranceNumber)
                       setErrors({
                         ...errors,
@@ -541,7 +542,7 @@ const Parent_Details = () => {
                   type="insuranceHolder"
                   placeholder="Enter Insurance Holder"
                   onChange={(e) => {
-                    setInsuranceHolder(e.target.value);
+                    setInsuranceHolder(e.target.value.trim());
                     if (!!errors.insuranceHolder)
                       setErrors({
                         ...errors,
