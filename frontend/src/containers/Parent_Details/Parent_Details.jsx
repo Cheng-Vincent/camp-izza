@@ -158,7 +158,7 @@ const Parent_Details = () => {
         errorsMessage.ec2phone = "Enter only numbers.";
       }
       else if(info.ec2Phone.length !== 10){
-        errorsMessage.ec2phone = "Please enter digit phone number.";
+        errorsMessage.ec2phone = "Please enter 10 digit phone number.";
       }
     }
     if (!info.ec2Relation) {
@@ -258,7 +258,7 @@ const Parent_Details = () => {
           <Row className="mb-3">
             <Col className="mb-3">
               <Form.Group className="mb-3" controlId="formGroupBirthday">
-                <Form.Label>Date of Birth (MM/DD/YY)</Form.Label>
+                <Form.Label>Parent's Date of Birth (MM/DD/YY)</Form.Label>
                 <Form.Control
                   required
                   type="birthday"
