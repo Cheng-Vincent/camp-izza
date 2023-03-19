@@ -249,29 +249,25 @@ app.post("/parentdashboard", (req, res) => {
 
 
 app.post("/financial_aid", (req) => {
-  const { household, income, total, orgs, circumstance } = req.body;
+  const { parent_id, household, income, total, orgs, circumstance } = req.body;
 
-  db.query(`INSERT INTO financial_aid_apps(household_size,annual_income,able_to_pay,local_org_description,circ_description, approved) 
-            VALUES (?,?,?,?,?, false)`,
-    [household, income, total, orgs, circumstance],
+  db.query(`INSERT INTO financial_aid_apps(parent_id, household_size,annual_income,able_to_pay,local_org_description,circ_description, approved) 
+            VALUES (?,?,?,?,?,?, false)`,
+    [parent_id, household, income, total, orgs, circumstance],
     (err, result) => {
       if (err) {
         console.log(err);
       }
-      console.log();
-      console.log(req.body);
     }
   );
 })
 
-app.post("/payment", (req, res) => {
+app.post("/getBalance", (req, res) => {
   const parent_id = req.body.parent_id
-  db.query("SELECT * FROM parents WHERE parent_id =?",[parent_id], function (err, result3) {
+  db.query("SELECT * FROM parents WHERE parent_id =?",[parent_id], function (err, result) {
     if (err) throw err;
-    //console.log(result3[0])
-    res.send({parent: result3[0]})
-    // const balance = result3[0].balance;
-    // res.send({ balance });
+    if (result.length > 0) res.send({balance: result[0].balance})
+    else { res.send ({balance: 0})}
   });
 })
 
@@ -281,9 +277,7 @@ app.post("/updPayment", (req, res) => {
     [parentID],
     (err, result) => {
       if (err) throw err;
-      console.log("updatedPayment");
     });
-  console.log("balance update works");
 })
 
 app.post('/youth', (req, res) => {

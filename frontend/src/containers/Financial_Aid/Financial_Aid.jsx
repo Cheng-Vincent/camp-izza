@@ -6,6 +6,7 @@ import Form from "react-bootstrap/Form";
 import { useNavigate } from "react-router-dom";
 
 const Financial_Aid = () => {
+  const [parentID, setParentID] = useState("");
   const [income, setIncome] = useState("");
   const [household, setHousehold] = useState("");
   const [total, setPrice] = useState("");
@@ -13,19 +14,30 @@ const Financial_Aid = () => {
   const [circumstance, setCirc] = useState("");
   const [validated, setValidated] = useState(false);
   const navigate = useNavigate();
-
   const [balance, setBalance] = useState(0);
 
   useEffect(() => {
-    Axios.post("/api/payment", { balance }).then(
+    // checks if user is logged in
+    Axios.get("/api/login").then((response) => {
+      if (response.data.loggedIn) {
+        setParentID(response.data.user.user_id);
+      } else {
+        navigate("/login");
+      }
+    });
+  }, []);
+
+  useEffect(() => {
+    Axios.post("/api/getBalance", {parent_id: parentID}).then(
       (response) => {
         setBalance(response.data.balance);
       }
     );
-  });
+  }, [parentID]);
 
   const insertFinancial_aid = () => {
     Axios.post("/api/financial_aid", {
+      parent_id: parentID,
       household: household,
       income: income,
       total: total,

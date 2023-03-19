@@ -14,13 +14,12 @@ const ParentDashboard = () => {
     const [parentID, setParentID] = useState();// replace with actual parent id later
     const [balance, setBalance] = useState("");
     const navigate = useNavigate();
-    const [bal, setBalanceStyle] = useState(balance == 0||null? "btn btn-primary mb-3 disabled":"btn btn-primary mb-3");
+    const [balanceStyle, setBalanceStyle] = useState("btn btn-primary mb-3");
 
   useEffect(() => {
     // checks if user is logged in
     axios.get("/api/login").then((response) => {
       if (response.data.loggedIn) {
-        console.log(response);
         setParentID(response.data.user.user_id);
       } else {
         navigate("/login");
@@ -32,9 +31,10 @@ const ParentDashboard = () => {
     axios
       .post("/api/parentdashboard", { parent_id: parentID })
       .then((response) => {
-        console.log(response);
         setYouthInfo(response.data.youthInfo);
         setBalance(": $" + response.data.balance);
+        if (response.data.balance == 0) setBalanceStyle("btn btn-primary mb-3 disabled")
+        else setBalanceStyle("btn btn-primary mb-3");
       });
   }, [parentID]);
 
@@ -177,7 +177,7 @@ const ParentDashboard = () => {
           </div>
 
           <div className="card-body">
-            <a href="/payment" className="btn btn-primary mb-3">
+            <a href="/payment" className={balanceStyle}>
               Pay Now
             </a>
             <h4 className="text-center"> Balance Due {balance} </h4>

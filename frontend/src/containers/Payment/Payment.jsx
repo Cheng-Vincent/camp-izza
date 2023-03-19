@@ -17,7 +17,6 @@ const Payment = () => {
     // checks if user is logged in
     Axios.get("/api/login").then((response) => {
       if (response) {
-        console.log(response);
         if (response.data.loggedIn) {
           setParentID(response.data.user.user_id);
         } else {
@@ -28,16 +27,14 @@ const Payment = () => {
   }, []);
 
   useEffect(() => {
-    Axios.post("/api/payment", { parent_id: parentID })
+    Axios.post("/api/getBalance", { parent_id: parentID })
       .then((response) => {
-        // console.log("getting balance from backend");
-        // console.log(response.data.balance);
-        setBalance(response.data.parent.balance);
+        setBalance(response.data.balance);
       })
       .catch((error) => {
         console.log(error);
       });
-  }, [parentID]);
+  });
 
   const createOrder = (data, actions) => {
     return actions.order
