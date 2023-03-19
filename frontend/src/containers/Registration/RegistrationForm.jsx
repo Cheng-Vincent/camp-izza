@@ -52,7 +52,7 @@ const RegistrationForm = () => {
         if (Object.keys(newErrors).length > 0) {
             setErrors(newErrors);
         } else {
-            Axios.post('/api/checkEmail', {
+            Axios.post('http://localhost:3001/checkEmail', {
                 email: form.email
             }).then((response) => {
                 console.log(response);
@@ -66,7 +66,7 @@ const RegistrationForm = () => {
     }
 
     const register = () => {
-        Axios.post('/api/register', {
+        Axios.post('http://localhost:3001/register', {
             email: form.email,
             password: form.password,
             first_name: form.firstName,
@@ -81,9 +81,9 @@ const RegistrationForm = () => {
     };
 
     const sendConfirmEmail = () => {
-        Axios.post('/api/sendConfirmEmail', {
+        Axios.post('http://localhost:3001/sendConfirmEmail', {
             email: form.email,
-            name: form.firstName + form.lastName,
+            name: form.firstName +' '+ form.lastName,
             account_type: "parent"
         }).then((response) => {
             console.log(response)
@@ -93,19 +93,21 @@ const RegistrationForm = () => {
     return (
         <>
             <Row>
-                <Col className="mb-4"><h1>Welcome! Register a new account</h1></Col>
+                <Col className="mb-4"><h1>Register a new account.</h1></Col>
             </Row>
             <Row>
                 <Col className="mb-4">
                     <Form class="registration-form" onSubmit={handleSubmit}>
                         <Row as={Col} className="mb-4">
-                            <label class="mr-4">What are you registering as?</label>
+                            <label class="mr-4">What are you registering as? <br/>
+                                (If you are a youth participant, a parent/guardian must do this part)
+                            </label>
                             <div key={'inline-radio'}>
                                 <Form.Check
                                 required
                                 inline
                                 name="accountType"
-                                label="Parent"
+                                label="Parent/Guardian"
                                 type="radio"
                                 ></Form.Check>
                                 <Form.Check
