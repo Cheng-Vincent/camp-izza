@@ -76,7 +76,7 @@ const RegistrationForm = () => {
             setMessage('');
             sendConfirmEmail();
             alert(response.data.message);
-            // navigate('/login');
+            navigate('/login');
         });
     };
 

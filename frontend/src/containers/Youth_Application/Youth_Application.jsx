@@ -146,18 +146,18 @@ const Youth_Application = () => {
       }).then((response) => {
         alert("Youth added!");
         navigate("/parentdashboard");
-        // Axios.post("/api/youthEmail", {
-        //     parentID: parentID,
-        //     firstName: form.firstName,
-        //     lastName: form.lastName,
-        //     email: form.email
-        // })
-        //   .catch((error) => {
-        //     console.log(error);
-        //   })
-        //   .then((response) => {
-        //     navigate("/parentdashboard");
-        //   });
+        Axios.post("/api/youthEmail", {
+            parentID: parentID,
+            firstName: form.firstName,
+            lastName: form.lastName,
+            email: form.email
+        })
+          .catch((error) => {
+            console.log(error);
+          })
+          .then((response) => {
+            navigate("/parentdashboard");
+          });
       });
     });
   };
