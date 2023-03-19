@@ -32,7 +32,7 @@ const Parent_Details = () => {
 
   useEffect(() => {
     // checks if user is logged in
-    Axios.get("/api/login").then((response) => {
+    Axios.get("http://localhost:3001/login").then((response) => {
       if (response) {
         console.log(response);
         if (response.data.loggedIn) {
@@ -209,7 +209,7 @@ const Parent_Details = () => {
       setErrors(newErrors);
     } else {
       e.preventDefault();
-      Axios.post("/api/parentDetails", {
+      Axios.post("http://localhost:3001/parentDetails", {
         parentID: parentID,
         parentBirthday: parentBirthday,
         parentPhone: parentPhone,
@@ -226,7 +226,7 @@ const Parent_Details = () => {
         insuranceHolder: insuranceHolder,
         insuranceNumber: insuranceNumber,
       }).then(() => {
-        alert("Form submitted! If you submit another form, it will override this form's submission.");
+        alert("Form submitted!");
         navigate("/parentdashboard");
       });
     }

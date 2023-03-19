@@ -13,6 +13,7 @@ const ParentDashboard = () => {
     const [youthInfo, setYouthInfo] = useState([]);
     const [parentID, setParentID] = useState();// replace with actual parent id later
     const [balance, setBalance] = useState("");
+    const [parentFormSubmitted, setParentFormSubmitted] = useState(false);
     const navigate = useNavigate();
     const [balanceStyle, setBalanceStyle] = useState("btn btn-primary mb-3");
 
@@ -33,6 +34,7 @@ const ParentDashboard = () => {
       .then((response) => {
         setYouthInfo(response.data.youthInfo);
         setBalance(": $" + response.data.balance);
+        setParentFormSubmitted(response.data.parentDetailsCompleted);
         if (response.data.balance == 0) setBalanceStyle("btn btn-primary mb-3 disabled")
         else setBalanceStyle("btn btn-primary mb-3");
       });
@@ -125,8 +127,8 @@ const ParentDashboard = () => {
         {/*I want to keep this for now */}
         <Card className="mb-4 mx-auto">
               <Card.Body>
-                <Card.Title>TO-DO: Complete parent details form</Card.Title>
-                <Button variant="danger" type="link" href="parentdetails">Complete</Button>
+                <Card.Title>Complete Parent Details Form</Card.Title>
+                <Button variant="danger" type="link" href="parentdetails" disabled={parentFormSubmitted}>Submit</Button>
               </Card.Body>
         </Card>
 
