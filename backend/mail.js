@@ -101,7 +101,7 @@ async function emailYouth(auth, emailTo, emailSubect, emailBody) {
         html: emailBody,
         attachments: [{
             filename: 'logo.png',
-            path: './assets/yss-logo.png',
+            path: './asset/yss-logo.png',
             cid: 'logo'
         }],
         textEncoding: 'base64',
