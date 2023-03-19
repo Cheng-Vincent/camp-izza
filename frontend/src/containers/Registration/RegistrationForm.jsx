@@ -68,7 +68,7 @@ const RegistrationForm = () => {
             setMessage('');
             sendConfirmEmail();
             alert(response.data.message);
-            // navigate('/login');
+            navigate('/login');
         });
     };
 
@@ -78,7 +78,7 @@ const RegistrationForm = () => {
             name: form.firstName + form.lastName,
             account_type: "parent"
         }).then((err) => {
-            console.log(err.data)
+            if (err) throw err;
         })
     }
 
@@ -108,8 +108,8 @@ const RegistrationForm = () => {
                                 type="radio"></Form.Check>
                             </div>
                         </Row>
-                        <Row as={Col}>
-                            <Form.Group as={Col} className="mb-4">
+                        <Row>
+                            <Form.Group as={Col} md={6} className="mb-4">
                                 <Form.Label>First Name</Form.Label>
                                 <Form.Control
                                 type="text"
@@ -118,7 +118,7 @@ const RegistrationForm = () => {
                                 onChange={(e) => {setField('firstName', e.target.value)}}></Form.Control>
                                 <Form.Control.Feedback type="invalid">{errors.firstName}</Form.Control.Feedback>
                             </Form.Group>
-                            <Form.Group as={Col} className="mb-4">
+                            <Form.Group as={Col} md={6} className="mb-4">
                                 <Form.Label>Last Name</Form.Label>
                                 <Form.Control
                                 type="text"
@@ -128,38 +128,59 @@ const RegistrationForm = () => {
                                 <Form.Control.Feedback type="invalid">{errors.lastName}</Form.Control.Feedback>
                             </Form.Group>
                         </Row>
-                        <Row as={Col}>
-                            <Form.Group as={Col} className="mb-4">
-                                <Form.Label>Email</Form.Label>
-                                <Form.Control
-                                    type="email"
-                                    placeholder="email"
-                                    isInvalid={!!errors.email}
-                                    onChange={(e) => {setField('email', e.target.value)}}></Form.Control>
-                                <Form.Control.Feedback type="invalid">{errors.email}</Form.Control.Feedback>
-                            </Form.Group>
+                        <Row>
+                            <Col>
+                                <Form.Group className="mb-4">
+                                    <Form.Label>Email</Form.Label>
+                                    <Form.Control
+                                        type="email"
+                                        placeholder="email"
+                                        isInvalid={!!errors.email}
+                                        onChange={(e) => {
+                                            setField('email', e.target.value)
+                                        }}
+                                    ></Form.Control>
+                                    <Form.Control.Feedback type="invalid">
+                                        {errors.email}
+                                    </Form.Control.Feedback>
+                                </Form.Group>
+                            </Col>
                         </Row>
-                        <Row as={Col}>
-                            <Form.Group as={Col} className="mb-4">
-                                <Form.Label>Password</Form.Label>
-                                <Form.Control
-                                type="password" 
-                                placeholder="password"
-                                isInvalid={!!errors.password}
-                                onChange={(e) => {setField('password', e.target.value)}}></Form.Control>
-                                <Form.Control.Feedback type="invalid">{errors.password}</Form.Control.Feedback>
-                            </Form.Group>
+                        <Row>
+                            <Col>
+                                <Form.Group className="mb-4">
+                                    <Form.Label>Password</Form.Label>
+                                    <Form.Control
+                                        type="password"
+                                        placeholder="password"
+                                        isInvalid={!!errors.password}
+                                        onChange={(e) => {
+                                            setField('password', e.target.value)
+                                        }}
+                                    ></Form.Control>
+                                    <Form.Control.Feedback type="invalid">
+                                        {errors.password}
+                                    </Form.Control.Feedback>
+                                </Form.Group>
+                            </Col>
                         </Row>
-                        <Row as={Col}>
-                            <Form.Group as={Col} className="mb-4">
-                                <Form.Label>Confirm Password</Form.Label>
-                                <Form.Control
-                                type="password" 
-                                placeholder="confirm password"
-                                isInvalid={!!errors.confirmPassword}
-                                onChange={(e) => {setField('confirmPassword', e.target.value)}}></Form.Control>
-                                <Form.Control.Feedback type="invalid">{errors.confirmPassword}</Form.Control.Feedback>
-                            </Form.Group>
+                        <Row>
+                            <Col>
+                                <Form.Group className="mb-4">
+                                    <Form.Label>Confirm Password</Form.Label>
+                                    <Form.Control
+                                        type="password"
+                                        placeholder="confirm password"
+                                        isInvalid={!!errors.confirmPassword}
+                                        onChange={(e) => {
+                                            setField('confirmPassword', e.target.value)
+                                        }}
+                                    ></Form.Control>
+                                    <Form.Control.Feedback type="invalid">
+                                        {errors.confirmPassword}
+                                    </Form.Control.Feedback>
+                                </Form.Group>
+                            </Col>
                         </Row>
                         <Row><p class="error-msg">{message}</p></Row>
                         <Row>

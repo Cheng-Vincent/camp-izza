@@ -177,7 +177,7 @@ const ParentDashboard = () => {
           </div>
 
           <div className="card-body">
-            <a href="/payment" className="btn btn-primary mb-3">
+            <a href="/payment" className={bal}>
               Pay Now
             </a>
             <h4 className="text-center"> Balance Due {balance} </h4>
