@@ -172,8 +172,8 @@ app.post("/sendConfirmEmail", (req, res) => {
   We look forward to having them join us for another year of incredible programming.
   Please feel free to get in touch with us at youthspiritualsummit@gmail.com if you are encountering any issues.</p>
   <p>Warm Regards,</p>
-  <p>The Youth Spiritual Summit Registration Team</p>'
-  <a href="http://localhost:3000"><img width="200px" src="cid:logo"></a>`
+  <p>The Youth Spiritual Summit Registration Team</p>`
+  // <a href="http://localhost:3000"><img width="200px" src="cid:logo"></a>`
   const emailSubject = "Youth Spiritual Summit Account Registration"
 
   mail.authorize().then((auth) => {
