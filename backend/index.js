@@ -18,7 +18,7 @@ const PORT = process.env.PORT || 3001;
 const app = express();
 app.use(express.json());
 app.use(cors({
-  origin: ["https://youthspiritualsummit.netlify.app/"],
+  origin: ["http://localhost:3000"],
   methods: ["GET", "POST"],
   credentials: true
 }));
@@ -33,10 +33,6 @@ app.use(session({
     maxAge: 24 * 60 * 60 * 1000
   }
 }));
-
-app.get('/', (req, res) => {
-  res.send({message: "Hello"})
-})
 
 function formatDate(date) {
   const d = new Date(date);
@@ -158,8 +154,9 @@ app.post('/parentDetails', (req, res) => {
   console.log(parentID)
   db.query(
     "Update parents Set birthday=?, phone_number=?, address_street=?, address_city=?, address_zip=?, ec_name1=?, ec_phone1=?, ec_relation1=?, insurance_provider=?, insurance_policy_holder=?, insurance_policy_number=?, ec_name2=?, ec_phone2=?, ec_relation2=? where parent_id=?",
-    [parentBirthday, phone, street, city, zip, ec1Name, ec1Phone, ec1Relation, insuranceProvider, insuranceHolder, insuranceNumber,ec2Name, ec2Phone, ec2Relation, parentID], (err, res) => {
+    [parentBirthday, phone, street, city, zip, ec1Name, ec1Phone, ec1Relation, insuranceProvider, insuranceHolder, insuranceNumber,ec2Name, ec2Phone, ec2Relation, parentID], (err, result) => {
       console.log(err)
+      res.send({message: "Update Finished"})
     }
   )
 })
@@ -176,14 +173,13 @@ app.post("/sendConfirmEmail", (req, res) => {
   Please feel free to get in touch with us at youthspiritualsummit@gmail.com if you are encountering any issues.</p>
   <p>Warm Regards,</p>
   <p>The Youth Spiritual Summit Registration Team</p>
-  <a href="https://youthspiritualsummit.netlify.app/"><img width="200px" src="cid:logo"></a>`
+  <a href="http://localhost:3000"><img width="200px" src="cid:logo"></a>`
   const emailSubject = "Youth Spiritual Summit Account Registration"
 
   mail.authorize().then((auth) => {
     mail.emailYouth(auth, emailTo, emailSubject, emailBody)
-  }).then((res) => {
+  }).then(() => {
     console.log("Email Sent!")
-    res.send({res})
   }).catch((error) => {
     res.send(error)
   });
@@ -208,7 +204,7 @@ app.post("/youthEmail", (req, res) => {
       if you or your youth are encountering any issues.</p>
       <p>Warm Regards,</p>
       <p>The Youth Spiritual Summit Registration Team</p>
-      <a href="https://youthspiritualsummit.netlify.app/"><img width="200px" src="cid:logo"></a>`
+      <a href="http://localhost:3000"><img width="200px" src="cid:logo"></a>`
       const emailSubject = "Welcome to Youth Spiritual Summit"
 
       mail.authorize().then((auth) => {
