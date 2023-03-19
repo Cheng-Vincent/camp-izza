@@ -65,9 +65,17 @@ const Youth_Application = () => {
       if (!/^\d+$/.test(phone)) {
         errorsMessage.phone = "Enter only numbers.";
       }
+      else if(phone.length !== 10){
+        errorsMessage.phone = "Please enter 10 digit phone number.";
+      }
     }
     if (!email) {
       errorsMessage.email = "Email is required.";
+    }
+    else{
+      if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)){
+        errorsMessage.email = "Enter Valid Email"
+      }
     }
 
     if (!grade) {
@@ -79,8 +87,18 @@ const Youth_Application = () => {
     if (!firstName) {
       errorsMessage.firstName = "First name is required.";
     }
+    else{
+      if(/^\s*$/.test(firstName)){
+        errorsMessage.firstName = "First Name is required."
+      }
+    }
     if (!lastName) {
       errorsMessage.lastName = "Last name is required.";
+    }
+    else{
+      if(/^\s*$/.test(firstName)){
+        errorsMessage.firstName = "Last Name is required."
+      }
     }
     return errorsMessage;
   };
@@ -122,18 +140,18 @@ const Youth_Application = () => {
         phone: form.phone,
         parentID: parentID,
       }).then((response) => {
-        Axios.post("/api/youthEmail", {
-            parentID: parentID,
-            firstName: form.firstName,
-            lastName: form.lastName,
-            email: form.email
-        })
-          .catch((error) => {
-            console.log(error);
-          })
-          .then((response) => {
-            navigate("/parentdashboard");
-          });
+        // Axios.post("/api/youthEmail", {
+        //     parentID: parentID,
+        //     firstName: form.firstName,
+        //     lastName: form.lastName,
+        //     email: form.email
+        // })
+        //   .catch((error) => {
+        //     console.log(error);
+        //   })
+        //   .then((response) => {
+        //     navigate("/parentdashboard");
+        //   });
       });
     });
   };

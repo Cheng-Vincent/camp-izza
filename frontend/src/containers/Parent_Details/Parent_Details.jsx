@@ -49,10 +49,10 @@ const Parent_Details = () => {
     if (!info.parentBirthday) {
       errorsMessage.birthday = "Birthday is required.";
     }
-    if (!!info.birthday) {
-      var checkBirthday = info.birthday.split("/");
+    if (!!info.parentBirthday) {
+      var checkBirthday = info.parentBirthday.split("/");
       if (checkBirthday.length !== 3) {
-        const date = new Date(info.birthday);
+        const date = new Date(info.parentBirthday);
         if (!(date.getTime() === date.getTime())) {
           errorsMessage.birthday = "Enter Valid Birthday";
         }
@@ -64,45 +64,121 @@ const Parent_Details = () => {
     }
     if (!!info.parentPhone) {
       if (!/^\d+$/.test(info.parentPhone)) {
-        errorsMessage.phone = "Enter only numbers.";
+        errorsMessage.parentPhone = "Enter only numbers.";
+      }
+      else if(info.parentPhone.length !== 10){
+        errorsMessage.parentPhone = "Please enter 10 digit phone number.";
       }
     }
     if (!info.street) {
       errorsMessage.street = "Address Street is required.";
     }
+    else{
+      if(/^\s*$/.test(info.street)){
+        errorsMessage.street = "Address is required."
+      }
+    }
+
     if (!info.city) {
       errorsMessage.city = "Address City is required.";
     }
+    else{
+      if(/^\s*$/.test(info.city)){
+        errorsMessage.city = "City is required."
+      }
+    }
+
     if (!info.zip) {
       errorsMessage.zip = "Address Zip is required.";
+    }
+    else{
+      if (!/^\d+$/.test(info.zip)) {
+        errorsMessage.zip = "Enter only numbers.";
+      }
     }
     if (!info.ec1Name) {
       errorsMessage.ec1 = "Emergency Contact name is required.";
     }
+    else{
+      if(/^\s*$/.test(info.ec1Name)){
+        errorsMessage.ec1 = "Emergency Contact name is required."
+      }
+    }
     if (!info.ec1Phone) {
       errorsMessage.ec1phone = "Emergency Contact phone number is required.";
     }
-    if (!info.ec1Relation) {
-      errorsMessage.ec1relation = "Emergency Contact Relation is required.";
+    else{
+      if (!/^\d+$/.test(info.ec1Phone)) {
+        errorsMessage.ec1Phone = "Enter only numbers.";
+      }
+      else if(info.ec1Phone.length !== 10){
+        errorsMessage.ec1Phone = "Please enter 10 digit phone number.";
+      }
     }
+    if (!info.ec1Relation) {
+      errorsMessage.ec1Relation = "Emergency Contact Relation is required.";
+    }
+    else{
+      if(/^\s*$/.test(info.ec1Relation)){
+        errorsMessage.ec1Relation = "Emergency Contact Relation is required."
+      }
+    }
+
     if (!info.ec2Name) {
       errorsMessage.ec2 = "Emergency Contact name is required.";
+    }
+    else{
+      if(/^\s*$/.test(info.ec2Name)){
+        errorsMessage.ec2 = "Emergency Contact name is required."
+      }
     }
     if (!info.ec2Phone) {
       errorsMessage.ec2phone = "Emergency Contact phone number is required.";
     }
-    if (!info.ec2Relation) {
-      errorsMessage.ecrRelation = "Emergency Contact Relation is required.";
+    else{
+      if (!/^\d+$/.test(info.ec2Phone)) {
+        errorsMessage.ec2phone = "Enter only numbers.";
+      }
+      else if(info.ec2Phone.length !== 10){
+        errorsMessage.ec2phone = "Please enter digit phone number.";
+      }
     }
+    if (!info.ec2Relation) {
+      errorsMessage.ec2Relation = "Emergency Contact Relation is required.";
+    }
+    else{
+      if(/^\s*$/.test(info.ec2Relation)){
+        errorsMessage.ec2Relation = "Emergency Contact Relation is required."
+      }
+    }
+
     if (!info.insuranceProvider) {
       errorsMessage.insuranceProvider = "Insurance Provider is required.";
     }
+    else{
+      if(/^\s*$/.test(info.insuranceProvider)){
+        errorsMessage.insuranceProvider = "Insurance Provider is required."
+      }
+    }
+
     if (!info.insuranceHolder) {
       errorsMessage.insuranceHolder = "Insurance Holder is required.";
     }
+    else{
+      if(/^\s*$/.test(info.insuranceHolder)){
+        errorsMessage.insuranceHolder = "Insurance Holder is required."
+      }
+    }
+
     if (!info.insuranceNumber) {
       errorsMessage.insuranceNumber = "Isurance Number is required.";
     }
+    else{
+      if (!/^\d+$/.test(info.insuranceNumber)) {
+        errorsMessage.insuranceNumber = "Enter only numbers.";
+      }
+    }
+
     return errorsMessage;
   };
 
@@ -147,9 +223,8 @@ const Parent_Details = () => {
         insuranceHolder: insuranceHolder,
         insuranceNumber: insuranceNumber,
       }).then(() => {
-
+        navigate("/parentdashboard");
       });
-      navigate("/parentdashboard");
     }
   };
 
@@ -183,7 +258,7 @@ const Parent_Details = () => {
             </Col>
             <Col className="mb-3">
               <Form.Group className="mb-3" controlId="formGroupPhoneNumber">
-                <Form.Label>Parent Phone Number (000-000-0000)</Form.Label>
+                <Form.Label>Parent Phone Number</Form.Label>
                 <Form.Control
                   type="phonenumber"
                   placeholder="Enter Phone Number"
@@ -303,16 +378,16 @@ const Parent_Details = () => {
                   placeholder="Enter Phone Number"
                   onChange={(e) => {
                     setec1Phone(e.target.value);
-                    if (!!errors.ec1phone)
+                    if (!!errors.ec1Phone)
                       setErrors({
                         ...errors,
-                        ec1phone: null,
+                        ec1Phone: null,
                       });
                   }}
-                  isInvalid={!!errors.ec1phone}
+                  isInvalid={!!errors.ec1Phone}
                 />
                 <Form.Control.Feedback type="invalid">
-                  {errors.ec1phone}
+                  {errors.ec1Phone}
                 </Form.Control.Feedback>
               </Form.Group>
             </Col>
@@ -325,16 +400,16 @@ const Parent_Details = () => {
                   placeholder="Relation to Youth"
                   onChange={(e) => {
                     setec1Relation(e.target.value);
-                    if (!!errors.ec1relation)
+                    if (!!errors.ec1Relation)
                       setErrors({
                         ...errors,
-                        ec1relation: null,
+                        ec1Relation: null,
                       });
                   }}
-                  isInvalid={!!errors.ec1relation}
+                  isInvalid={!!errors.ec1Relation}
                 />
                 <Form.Control.Feedback type="invalid">
-                  {errors.ec1relation}
+                  {errors.ec1Relation}
                 </Form.Control.Feedback>
               </Form.Group>
             </Col>
@@ -355,7 +430,7 @@ const Parent_Details = () => {
                         ec2: null,
                       });
                   }}
-                  isInvalid={!!errors.ec1relation}
+                  isInvalid={!!errors.ec2}
                 />
                 <Form.Control.Feedback type="invalid">
                   {errors.ec2}
@@ -393,16 +468,16 @@ const Parent_Details = () => {
                   placeholder="Relation to Youth"
                   onChange={(e) => {
                     setec2Relation(e.target.value);
-                    if (!!errors.ec1relation)
+                    if (!!errors.ec2Relation)
                       setErrors({
                         ...errors,
-                        ec1relation: null,
+                        ec2Relation: null,
                       });
                   }}
-                  isInvalid={!!errors.ec1relation}
+                  isInvalid={!!errors.ec2Relation}
                 />
                 <Form.Control.Feedback type="invalid">
-                  {errors.ec1relation}
+                  {errors.ec2Relation}
                 </Form.Control.Feedback>
               </Form.Group>
             </Col>
@@ -467,7 +542,7 @@ const Parent_Details = () => {
                     if (!!errors.insuranceHolder)
                       setErrors({
                         ...errors,
-                        insuranceNumber: null,
+                        insuranceHolder: null,
                       });
                   }}
                   isInvalid={!!errors.insuranceHolder}
