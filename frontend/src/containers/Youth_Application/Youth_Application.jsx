@@ -145,7 +145,6 @@ const Youth_Application = () => {
         parentID: parentID,
       }).then((response) => {
         alert("Youth added!");
-        navigate("/parentdashboard");
         Axios.post("/api/youthEmail", {
             parentID: parentID,
             firstName: form.firstName,
