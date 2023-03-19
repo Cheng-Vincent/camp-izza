@@ -99,11 +99,11 @@ async function emailYouth(auth, emailTo, emailSubect, emailBody) {
         from: "vcheng@campizza@gmail.com",
         subject: emailSubect,
         html: emailBody,
-        // attachments: [{
-        //     filename: 'logo.png',
-        //     path: '../frontend/src/assets/yss-logo.png',
-        //     cid: 'logo'
-        // }],
+        attachments: [{
+            filename: 'logo.png',
+            path: './assets/yss-logo.png',
+            cid: 'logo'
+        }],
         textEncoding: 'base64',
     };
 
