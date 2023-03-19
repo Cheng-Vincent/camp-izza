@@ -19,7 +19,7 @@ const ParentDashboard = () => {
 
   useEffect(() => {
     // checks if user is logged in
-    axios.get("/api/login").then((response) => {
+    axios.get("http://localhost:3001/login").then((response) => {
       if (response.data.loggedIn) {
         setParentID(response.data.user.user_id);
       } else {
@@ -30,7 +30,7 @@ const ParentDashboard = () => {
 
   useEffect(() => {
     axios
-      .post("/api/parentdashboard", { parent_id: parentID })
+      .post("http://localhost:3001/parentdashboard", { parent_id: parentID })
       .then((response) => {
         setYouthInfo(response.data.youthInfo);
         setBalance(": $" + response.data.balance);
@@ -127,7 +127,7 @@ const ParentDashboard = () => {
         {/*I want to keep this for now */}
         <Card className="mb-4 mx-auto">
               <Card.Body>
-                <Card.Title>Complete Parent Details Form</Card.Title>
+                <Card.Title>Complete Parent/Guardian Details Form</Card.Title>
                 <Button variant="danger" type="link" href="parentdetails" disabled={parentFormSubmitted}>Submit</Button>
               </Card.Body>
         </Card>
