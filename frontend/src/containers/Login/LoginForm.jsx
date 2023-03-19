@@ -29,7 +29,7 @@ const LoginForm = () => {
     };
 
     const login = () => {
-        Axios.post('http://localhost:3001/login', {
+        Axios.post('/api/login', {
             email: loginEmail,
             password: loginPassword
         }).catch((error) => {
