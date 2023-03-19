@@ -32,7 +32,7 @@ const Parent_Details = () => {
 
   useEffect(() => {
     // checks if user is logged in
-    Axios.get("/api/login").then((response) => {
+    Axios.get("http://localhost:3001/login").then((response) => {
       if (response) {
         console.log(response);
         if (response.data.loggedIn) {
@@ -74,29 +74,35 @@ const Parent_Details = () => {
       }
     }
     if (!info.street) {
-      errorsMessage.street = "Address Street is required.";
+      errorsMessage.street = "Street Address is required.";
     }
     else{
       if(/^\s*$/.test(info.street)){
-        errorsMessage.street = "Address is required."
+        errorsMessage.street = "Street Address is required."
       }
     }
 
     if (!info.city) {
-      errorsMessage.city = "Address City is required.";
+      errorsMessage.city = "City is required.";
     }
     else{
       if(/^\s*$/.test(info.city)){
         errorsMessage.city = "City is required."
       }
+      else if(!/^[a-zA-Z]*$/.test(info.city)){
+        errorsMessage.city = "Enter only letters.";
+      }
     }
 
     if (!info.zip) {
-      errorsMessage.zip = "Address Zip is required.";
+      errorsMessage.zip = "Zip Code is required.";
     }
     else{
       if (!/^\d+$/.test(info.zip)) {
         errorsMessage.zip = "Enter only numbers.";
+      }
+      else if(info.zip.length !== 5){
+        errorsMessage.zip = "Please enter 5 digit Zip Code.";
       }
     }
     if (!info.ec1Name) {
@@ -105,6 +111,9 @@ const Parent_Details = () => {
     else{
       if(/^\s*$/.test(info.ec1Name)){
         errorsMessage.ec1 = "Emergency Contact name is required."
+      }
+      else if(!/^[a-zA-Z]*$/.test(info.ec1Name)){
+        errorsMessage.ec1 = "Enter only letters.";
       }
     }
     if (!info.ec1Phone) {
@@ -125,6 +134,9 @@ const Parent_Details = () => {
       if(/^\s*$/.test(info.ec1Relation)){
         errorsMessage.ec1Relation = "Emergency Contact Relation is required."
       }
+      else if(!/^[a-zA-Z]*$/.test(info.ec1Relation)){
+        errorsMessage.ec1Relation = "Enter only letters.";
+      }
     }
 
     if (!info.ec2Name) {
@@ -133,6 +145,9 @@ const Parent_Details = () => {
     else{
       if(/^\s*$/.test(info.ec2Name)){
         errorsMessage.ec2 = "Emergency Contact name is required."
+      }
+      else if(!/^[a-zA-Z]*$/.test(info.ec2Name)){
+        errorsMessage.ec2 = "Enter only letters.";
       }
     }
     if (!info.ec2Phone) {
@@ -152,6 +167,9 @@ const Parent_Details = () => {
     else{
       if(/^\s*$/.test(info.ec2Relation)){
         errorsMessage.ec2Relation = "Emergency Contact Relation is required."
+      }
+      else if(!/^[a-zA-Z]*$/.test(info.ec2Relation)){
+        errorsMessage.ec2Relation = "Enter only letters.";
       }
     }
 
@@ -177,8 +195,8 @@ const Parent_Details = () => {
       errorsMessage.insuranceNumber = "Isurance Number is required.";
     }
     else{
-      if (!/^\d+$/.test(info.insuranceNumber)) {
-        errorsMessage.insuranceNumber = "Enter only numbers.";
+      if(/^\s*$/.test(info.insuranceNumber)){
+        errorsMessage.insuranceNumber = "Insurance Number is required.";
       }
     }
 
@@ -209,7 +227,7 @@ const Parent_Details = () => {
       setErrors(newErrors);
     } else {
       e.preventDefault();
-      Axios.post("/api/parentDetails", {
+      Axios.post("http://localhost:3001/parentDetails", {
         parentID: parentID,
         parentBirthday: parentBirthday,
         parentPhone: parentPhone,
@@ -262,7 +280,7 @@ const Parent_Details = () => {
             </Col>
             <Col className="mb-3">
               <Form.Group className="mb-3" controlId="formGroupPhoneNumber">
-                <Form.Label>Parent Phone Number</Form.Label>
+                <Form.Label>Parent/Guardian Phone Number</Form.Label>
                 <Form.Control
                   type="phonenumber"
                   placeholder="Enter Phone Number"
@@ -284,11 +302,11 @@ const Parent_Details = () => {
           </Row>
           <Row className="mb-3">
             <Form.Group className="mb-3" controlId="formGroupAddress">
-              <Form.Label>Address Street</Form.Label>
+              <Form.Label>Street Address</Form.Label>
               <Form.Control
                 required
                 type="name"
-                placeholder="Enter Address Street"
+                placeholder="Enter Street Address"
                 onChange={(e) => {
                   setStreet(e.target.value.trim());
                   if (!!errors.street)
@@ -307,11 +325,11 @@ const Parent_Details = () => {
           <Row className="mb-3">
             <Col className="mb-3">
               <Form.Group className="mb-3" controlId="formGroupCity">
-                <Form.Label>Address City</Form.Label>
+                <Form.Label>City</Form.Label>
                 <Form.Control
                   required
                   type="city"
-                  placeholder="Enter Address City"
+                  placeholder="Enter City"
                   onChange={(e) => {
                     setCity(e.target.value.trim());
                     if (!!errors.city)
