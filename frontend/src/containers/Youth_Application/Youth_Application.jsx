@@ -140,6 +140,7 @@ const Youth_Application = () => {
         phone: form.phone,
         parentID: parentID,
       }).then((response) => {
+        navigate("/parentdashboard");
         // Axios.post("/api/youthEmail", {
         //     parentID: parentID,
         //     firstName: form.firstName,
