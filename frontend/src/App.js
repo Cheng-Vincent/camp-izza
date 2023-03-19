@@ -22,6 +22,7 @@ function App() {
             <Route path="youth" element={<Youth_Application />} exact />
             <Route path="payment" element={<Payment />} exact />
             <Route path="parentdetails" element={<Parent_Details />} exact />
+            <Route path="financial_aid" element={<Financial_Aid />} exact />
           </Route>
           <Route path="login" element={<Login />} />
           <Route path="registration" element={<Registration />} />
