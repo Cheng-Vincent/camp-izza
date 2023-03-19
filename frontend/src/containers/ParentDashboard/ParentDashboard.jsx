@@ -49,13 +49,16 @@ const Parent_Details = () => {
     if (!info.parentBirthday) {
       errorsMessage.birthday = "Birthday is required.";
     }
-    if (!!info.parentBirthday) {
-      var checkBirthday = info.parentBirthday.split("/");
-      if (checkBirthday.length !== 3) {
-        const date = new Date(info.parentBirthday);
-        if (!(date.getTime() === date.getTime())) {
+    if (!!parentBirthday) {
+      var checkBirthday = parentBirthday.split("/");
+      console.log(parentBirthday)
+      if (checkBirthday.length == 3) {
+        const date = new Date(parentBirthday);
+        if (!date.getTime()) {
           errorsMessage.birthday = "Enter Valid Birthday";
         }
+      }
+      else{
         errorsMessage.birthday = "Enter Valid Birthday";
       }
     }

@@ -51,11 +51,15 @@ const Youth_Application = () => {
     }
     if (!!birthday) {
       var checkBirthday = birthday.split("/");
-      if (checkBirthday.length !== 3) {
+      console.log(checkBirthday)
+      if (checkBirthday.length == 3) {
         const date = new Date(birthday);
         if (!date.getTime()) {
           errorsMessage.birthday = "Enter Valid Birthday";
         }
+      }
+      else{
+        errorsMessage.birthday = "Enter Valid Birthday";
       }
     }
     if (!phone) {
