@@ -96,8 +96,8 @@ const Youth_Application = () => {
       errorsMessage.lastName = "Last name is required.";
     }
     else{
-      if(/^\s*$/.test(firstName)){
-        errorsMessage.firstName = "Last Name is required."
+      if(/^\s*$/.test(lastName)){
+        errorsMessage.lastName = "Last Name is required."
       }
     }
     return errorsMessage;
