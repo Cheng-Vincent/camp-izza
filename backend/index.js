@@ -181,9 +181,9 @@ app.post("/sendConfirmEmail", (req, res) => {
 
   mail.authorize().then((auth) => {
     mail.emailYouth(auth, emailTo, emailSubject, emailBody)
-  }).then(() => {
+  }).then((res) => {
     console.log("Email Sent!")
-    res.send({message: "Email Sent!"})
+    res.send({res})
   }).catch((error) => {
     res.send(error)
   });
