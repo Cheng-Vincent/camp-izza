@@ -29,7 +29,7 @@ const LoginForm = () => {
     };
 
     const login = () => {
-        Axios.post('/api/login', {
+        Axios.post('http://localhost:3001/login', {
             email: loginEmail,
             password: loginPassword
         }).catch((error) => {
@@ -50,21 +50,16 @@ const LoginForm = () => {
     return (
         <>
             <Row className="mb-4 justify-content-center">
-                <Col xs={10} md={8} lg={6}>
+                <Col>
                     <h1>Login</h1>
                 </Col>
             </Row>
             <Row>
-                <Col xs={10} md={8} lg={6} className="mx-auto">
-                    <Form
-                        className="login-form"
-                        noValidate
-                        validated={validated}
-                        onSubmit={handleSubmit}
-                    >
-                        <Form.Group as={Col} controlId="validationEmailInput" className="mb-4">
-                            <Form.Label>Email</Form.Label>
-                            <InputGroup hasValidation>
+                <Col className="mx-auto">
+                    <Form className="login-form" noValidate validated={validated} onSubmit={handleSubmit}>
+                        <Row as={Col}>
+                            <Form.Group className="mb-4">
+                                <Form.Label>Email</Form.Label>
                                 <Form.Control
                                     type="email"
                                     placeholder="email"
@@ -74,11 +69,11 @@ const LoginForm = () => {
                                     required
                                 ></Form.Control>
                                 <Form.Control.Feedback type="invalid">Email required.</Form.Control.Feedback>
-                            </InputGroup>
-                        </Form.Group>
-                        <Form.Group as={Col} controlId="validationPasswordInput" className="mb-4">
-                            <Form.Label>Password</Form.Label>
-                            <InputGroup hasValidation>
+                            </Form.Group>
+                        </Row>
+                        <Row as={Col}>
+                            <Form.Group className="mb-4">
+                                <Form.Label>Password</Form.Label>
                                 <Form.Control
                                     type="password"
                                     placeholder="password"
@@ -88,9 +83,9 @@ const LoginForm = () => {
                                     required
                                 ></Form.Control>
                                 <Form.Control.Feedback type="invalid">Password required.</Form.Control.Feedback>
-                            </InputGroup>
-                            <a href="/" className="mb-4">Forgot Password?</a>
-                        </Form.Group>
+                                <a href="/" className="mb-4">Forgot Password?</a>
+                            </Form.Group>
+                        </Row>
                         <Row><p className="login-error-message">{errorMessage}</p></Row>
                         <Row>
                             <Stack gap={2} className="mx-auto">

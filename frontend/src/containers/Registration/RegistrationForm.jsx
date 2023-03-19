@@ -26,15 +26,23 @@ const RegistrationForm = () => {
     const findFormErrors = () => {
         const {firstName, lastName, email, password, confirmPassword} = form;
         const newErrors = {};
-        if (!firstName || firstName === '') newErrors.firstName = 'First name required'
-        if (!lastName || lastName === '') newErrors.lastName = 'Last name required'
-        if (!email || email === '') newErrors.email = 'Email required'
-        if (!password || password === '') newErrors.password = 'Please choose a password'
+        if (!firstName || firstName === "") newErrors.firstName = "First name required"
+        if (!lastName || lastName === "") newErrors.lastName = "Last name required"
+        if (!email || email === "") newErrors.email = "Email required"
+        else if (!/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(email)) {
+            newErrors.email = "Please enter a valid email"
+        }
+        if (!password || password === '') newErrors.password = "Please choose a password"
         else if (confirmPassword && !(confirmPassword === password)) { 
             newErrors.confirmPassword = "Passwords do not match";
             newErrors.password = "Passwords do not match";
         }
-        if (!confirmPassword || confirmPassword === '') newErrors.confirmPassword = 'Please confirm your password'
+        else if (!/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^a-zA-Z0-9])(?!.*\s).{8,15}$/.test(password)) {
+            newErrors.password = "Password must be 8-15 characters long and contain at least one lowercase letter, "
+                                + "one uppercase letter, one digit, and one special character";
+            newErrors.confirmPassword = "Please confirm your password"
+        }
+        if (!confirmPassword || confirmPassword === '') newErrors.confirmPassword = "Please confirm your password"
         return newErrors;
     }
 
@@ -44,7 +52,7 @@ const RegistrationForm = () => {
         if (Object.keys(newErrors).length > 0) {
             setErrors(newErrors);
         } else {
-            Axios.post('/api/checkEmail', {
+            Axios.post('http://localhost:3001/checkEmail', {
                 email: form.email
             }).then((response) => {
                 console.log(response);
@@ -58,7 +66,7 @@ const RegistrationForm = () => {
     }
 
     const register = () => {
-        Axios.post('/api/register', {
+        Axios.post('http://localhost:3001/register', {
             email: form.email,
             password: form.password,
             first_name: form.firstName,
@@ -73,7 +81,7 @@ const RegistrationForm = () => {
     };
 
     const sendConfirmEmail = () => {
-        Axios.post('/api/sendConfirmEmail', {
+        Axios.post('http://localhost:3001/sendConfirmEmail', {
             email: form.email,
             name: form.firstName + form.lastName,
             account_type: "parent"
@@ -108,14 +116,14 @@ const RegistrationForm = () => {
                                 type="radio"></Form.Check>
                             </div>
                         </Row>
-                        <Row>
+                        <Row as={Col}>
                             <Form.Group as={Col} md={6} className="mb-4">
                                 <Form.Label>First Name</Form.Label>
                                 <Form.Control
                                 type="text"
                                 placeholder="first name"
                                 isInvalid={!!errors.firstName}
-                                onChange={(e) => {setField('firstName', e.target.value)}}></Form.Control>
+                                onChange={(e) => {setField('firstName', e.target.value.trim())}}></Form.Control>
                                 <Form.Control.Feedback type="invalid">{errors.firstName}</Form.Control.Feedback>
                             </Form.Group>
                             <Form.Group as={Col} md={6} className="mb-4">
@@ -124,63 +132,51 @@ const RegistrationForm = () => {
                                 type="text"
                                 placeholder="last name"
                                 isInvalid={!!errors.lastName}
-                                onChange={(e) => {setField('lastName', e.target.value)}}></Form.Control>
+                                onChange={(e) => {setField('lastName', e.target.value.trim())}}></Form.Control>
                                 <Form.Control.Feedback type="invalid">{errors.lastName}</Form.Control.Feedback>
                             </Form.Group>
                         </Row>
-                        <Row>
-                            <Col>
-                                <Form.Group className="mb-4">
-                                    <Form.Label>Email</Form.Label>
-                                    <Form.Control
-                                        type="email"
-                                        placeholder="email"
-                                        isInvalid={!!errors.email}
-                                        onChange={(e) => {
-                                            setField('email', e.target.value)
-                                        }}
-                                    ></Form.Control>
-                                    <Form.Control.Feedback type="invalid">
-                                        {errors.email}
-                                    </Form.Control.Feedback>
-                                </Form.Group>
-                            </Col>
+                        <Row as={Col}>
+                            <Form.Group className="mb-4">
+                                <Form.Label>Email</Form.Label>
+                                <Form.Control
+                                    type="email"
+                                    placeholder="email"
+                                    isInvalid={!!errors.email}
+                                    onChange={(e) => {setField('email', e.target.value.trim())}}
+                                ></Form.Control>
+                                <Form.Control.Feedback type="invalid">
+                                    {errors.email}
+                                </Form.Control.Feedback>
+                            </Form.Group>
                         </Row>
-                        <Row>
-                            <Col>
-                                <Form.Group className="mb-4">
-                                    <Form.Label>Password</Form.Label>
-                                    <Form.Control
-                                        type="password"
-                                        placeholder="password"
-                                        isInvalid={!!errors.password}
-                                        onChange={(e) => {
-                                            setField('password', e.target.value)
-                                        }}
-                                    ></Form.Control>
-                                    <Form.Control.Feedback type="invalid">
-                                        {errors.password}
-                                    </Form.Control.Feedback>
-                                </Form.Group>
-                            </Col>
+                        <Row as={Col}>
+                            <Form.Group className="mb-4">
+                                <Form.Label>Password</Form.Label>
+                                <Form.Control
+                                    type="password"
+                                    placeholder="password"
+                                    isInvalid={!!errors.password}
+                                    onChange={(e) => {setField('password', e.target.value)}}
+                                ></Form.Control>
+                                <Form.Control.Feedback type="invalid">
+                                    {errors.password}
+                                </Form.Control.Feedback>
+                            </Form.Group>
                         </Row>
-                        <Row>
-                            <Col>
-                                <Form.Group className="mb-4">
-                                    <Form.Label>Confirm Password</Form.Label>
-                                    <Form.Control
-                                        type="password"
-                                        placeholder="confirm password"
-                                        isInvalid={!!errors.confirmPassword}
-                                        onChange={(e) => {
-                                            setField('confirmPassword', e.target.value)
-                                        }}
-                                    ></Form.Control>
-                                    <Form.Control.Feedback type="invalid">
-                                        {errors.confirmPassword}
-                                    </Form.Control.Feedback>
-                                </Form.Group>
-                            </Col>
+                        <Row as={Col}>
+                            <Form.Group className="mb-4">
+                                <Form.Label>Confirm Password</Form.Label>
+                                <Form.Control
+                                    type="password"
+                                    placeholder="confirm password"
+                                    isInvalid={!!errors.confirmPassword}
+                                    onChange={(e) => {setField('confirmPassword', e.target.value)}}
+                                ></Form.Control>
+                                <Form.Control.Feedback type="invalid">
+                                    {errors.confirmPassword}
+                                </Form.Control.Feedback>
+                            </Form.Group>
                         </Row>
                         <Row><p class="error-msg">{message}</p></Row>
                         <Row>
