@@ -49,13 +49,16 @@ const Parent_Details = () => {
     if (!info.parentBirthday) {
       errorsMessage.birthday = "Birthday is required.";
     }
-    if (!!info.parentBirthday) {
-      var checkBirthday = info.parentBirthday.split("/");
-      if (checkBirthday.length !== 3) {
-        const date = new Date(info.parentBirthday);
-        if (!(date.getTime() === date.getTime())) {
+    if (!!parentBirthday) {
+      var checkBirthday = parentBirthday.split("/");
+      console.log(parentBirthday)
+      if (checkBirthday.length == 3) {
+        const date = new Date(parentBirthday);
+        if (!date.getTime()) {
           errorsMessage.birthday = "Enter Valid Birthday";
         }
+      }
+      else{
         errorsMessage.birthday = "Enter Valid Birthday";
       }
     }
@@ -109,10 +112,10 @@ const Parent_Details = () => {
     }
     else{
       if (!/^\d+$/.test(info.ec1Phone)) {
-        errorsMessage.ec1Phone = "Enter only numbers.";
+        errorsMessage.ec1phone = "Enter only numbers.";
       }
       else if(info.ec1Phone.length !== 10){
-        errorsMessage.ec1Phone = "Please enter 10 digit phone number.";
+        errorsMessage.ec1phone = "Please enter 10 digit phone number.";
       }
     }
     if (!info.ec1Relation) {
@@ -378,16 +381,16 @@ const Parent_Details = () => {
                   placeholder="Enter Phone Number"
                   onChange={(e) => {
                     setec1Phone(e.target.value);
-                    if (!!errors.ec1Phone)
+                    if (!!errors.ec1phone)
                       setErrors({
                         ...errors,
-                        ec1Phone: null,
+                        ec1phone: null,
                       });
                   }}
-                  isInvalid={!!errors.ec1Phone}
+                  isInvalid={!!errors.ec1phone}
                 />
                 <Form.Control.Feedback type="invalid">
-                  {errors.ec1Phone}
+                  {errors.ec1phone}
                 </Form.Control.Feedback>
               </Form.Group>
             </Col>
