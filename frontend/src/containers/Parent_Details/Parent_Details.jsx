@@ -32,7 +32,7 @@ const Parent_Details = () => {
 
   useEffect(() => {
     // checks if user is logged in
-    Axios.get("http://localhost:3001/login").then((response) => {
+    Axios.get("/api/login").then((response) => {
       if (response) {
         console.log(response);
         if (response.data.loggedIn) {
@@ -209,7 +209,7 @@ const Parent_Details = () => {
       setErrors(newErrors);
     } else {
       e.preventDefault();
-      Axios.post("http://localhost:3001/parentDetails", {
+      Axios.post("/api/parentDetails", {
         parentID: parentID,
         parentBirthday: parentBirthday,
         parentPhone: parentPhone,

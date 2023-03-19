@@ -76,7 +76,7 @@ const RegistrationForm = () => {
             setMessage('');
             sendConfirmEmail();
             alert(response.data.message);
-            navigate('/login');
+            // navigate('/login');
         });
     };
 
@@ -85,8 +85,8 @@ const RegistrationForm = () => {
             email: form.email,
             name: form.firstName + form.lastName,
             account_type: "parent"
-        }).then((err) => {
-            if (err) throw err;
+        }).then((response) => {
+            console.log(response)
         })
     }
 
