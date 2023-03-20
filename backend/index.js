@@ -222,6 +222,7 @@ app.post("/youthEmail", (req, res) => {
 app.post("/parentdashboard", (req, res) => {
   let parentID = req.body.parent_id;
   let youthInfo = [];
+  let parentDetailsCompleted = false;
   let balance = 0;
   db.query('SELECT * FROM accounts WHERE id IN (SELECT youth_id FROM youth WHERE parent_id = ?)',
     [parentID],
@@ -236,14 +237,17 @@ app.post("/parentdashboard", (req, res) => {
           })
         }
       }
-      db.query(`SELECT balance FROM parents WHERE parent_id = ?`,
+      db.query(`SELECT * FROM parents WHERE parent_id = ?`,
         [parentID],
         (error, result2) => {
           if (err) throw err;
           if (result2.length > 0) {
             balance = result2[0].balance;
+            if (result2[0].phone_number) {
+              parentDetailsCompleted = true;
+            }
           }
-          res.send({ youthInfo, balance });
+          res.send({ youthInfo, balance, parentDetailsCompleted });
         })
     })
 });
