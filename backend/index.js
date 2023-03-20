@@ -187,15 +187,15 @@ app.post("/sendConfirmEmail", (req, res) => {
 })
 
 app.post("/youthEmail", (req, res) => {
-  db.query("Select first_name, last_name, email from accounts Where id=?", [req.body.parentID], (err, res) => {
-    if (res.length > 0) {
-      console.log(res)
+  db.query("Select first_name, last_name, email from accounts Where id=?", [req.body.parentID], (err, result) => {
+    if (err) console.log(err)
+    if (result.length > 0) {
       const currentDate = new Date()
-      const emailTo = res[0].email
+      const emailTo = result[0].email
       // For testing purposes
       // const emailTo = 'vcheng@campizza.com'
-      const parentName = res[0].first_name + ' ' + res[0].first_name
-      const youthName = req.body.firstName + ' ' +req.body.lastName
+      const parentName = result[0].first_name + ' ' + result[0].last_name
+      const youthName = req.body.firstName + ' ' + req.body.lastName
       const emailBody = `<p>Dear ${parentName},</p>
       <p>Thank you for registering ${youthName} for the Youth Spiritual Summit ` +  currentDate.getFullYear() + `! 
       We look forward to having them join us for another year of incredible programming. 
