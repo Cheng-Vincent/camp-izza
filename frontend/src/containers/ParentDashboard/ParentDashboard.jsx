@@ -19,7 +19,7 @@ const ParentDashboard = () => {
 
   useEffect(() => {
     // checks if user is logged in
-    axios.get("http://localhost:3001/login").then((response) => {
+    axios.get("api/login").then((response) => {
       if (response.data.loggedIn) {
         setParentID(response.data.user.user_id);
       } else {
@@ -30,7 +30,7 @@ const ParentDashboard = () => {
 
   useEffect(() => {
     axios
-      .post("http://localhost:3001/parentdashboard", { parent_id: parentID })
+      .post("api/parentdashboard", { parent_id: parentID })
       .then((response) => {
         setYouthInfo(response.data.youthInfo);
         setBalance(": $" + response.data.balance);
@@ -51,7 +51,7 @@ const ParentDashboard = () => {
     <div>
       <div className="container p-5">
         <div style={{ textAlign: "center" }}>
-          <a href="https://youthspiritualsummit.weebly.com/">
+          <a href="/parentdashboard">
             <img
               className="col"
               class="logo"

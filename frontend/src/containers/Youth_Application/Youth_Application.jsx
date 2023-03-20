@@ -177,7 +177,7 @@ const Youth_Application = () => {
   return (
     <>
     <div style={{ textAlign: "center" }}>
-          <a href="https://youthspiritualsummit.weebly.com/">
+          <a href="/parentdashboard">
             <img
               className="col"
               class="logo"
