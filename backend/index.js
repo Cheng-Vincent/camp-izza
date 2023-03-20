@@ -155,8 +155,8 @@ app.post('/parentDetails', (req, res) => {
   db.query(
     "Update parents Set birthday=?, phone_number=?, address_street=?, address_city=?, address_zip=?, ec_name1=?, ec_phone1=?, ec_relation1=?, insurance_provider=?, insurance_policy_holder=?, insurance_policy_number=?, ec_name2=?, ec_phone2=?, ec_relation2=? where parent_id=?",
     [parentBirthday, phone, street, city, zip, ec1Name, ec1Phone, ec1Relation, insuranceProvider, insuranceHolder, insuranceNumber,ec2Name, ec2Phone, ec2Relation, parentID], (err, result) => {
-      console.log(err)
-      res.send({message: "Update Finished"})
+      if (err) console.log(err)
+      res.send({message: "Form submitted"})
     }
   )
 })

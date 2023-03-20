@@ -243,7 +243,7 @@ const Parent_Details = () => {
         insuranceProvider: insuranceProvider,
         insuranceHolder: insuranceHolder,
         insuranceNumber: insuranceNumber,
-      }).then(() => {
+      }).then((response) => {
         alert("Form submitted!");
         navigate("/parentdashboard");
       });
