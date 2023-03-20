@@ -127,14 +127,14 @@ const Youth_Application = () => {
   };
 
   const enterYouth = () => {
-    Axios.post("/api/register", {
+    Axios.post("api/register", {
       email: form.email,
       password: form.birthday,
       first_name: form.firstName,
       last_name: form.lastName,
       account_type: "youth",
     }).then(() => {
-      Axios.post("/api/youth", {
+      Axios.post("api/youth", {
         firstName: form.firstName,
         lastName: form.lastName,
         birthday: form.birthday,
@@ -145,18 +145,17 @@ const Youth_Application = () => {
         parentID: parentID,
       }).then((response) => {
         alert("Youth added!");
-        Axios.post("/api/youthEmail", {
+        Axios.post("api/youthEmail", {
             parentID: parentID,
             firstName: form.firstName,
             lastName: form.lastName,
             email: form.email
-        })
-          .catch((error) => {
-            console.log(error);
-          })
-          .then((response) => {
-            navigate("/parentdashboard");
-          });
+        }).then((response) => {
+          if (response.data.email_sent) navigate("/parentdashboard")
+          else console.log(response.data)
+          }).catch((err) => {
+            console.log(err);
+          }) 
       });
     });
   };

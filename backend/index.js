@@ -211,9 +211,9 @@ app.post("/youthEmail", (req, res) => {
       mail.authorize().then((auth) => {
         mail.emailYouth(auth, emailTo, emailSubject, emailBody)
       }).then(() => {
-        console.log("Email Sent!")
+        res.send({email_sent: true})
       }).catch((error) => {
-        res.send(error)
+        res.send({email_sent: false, error: error})
       });
     }
   })
