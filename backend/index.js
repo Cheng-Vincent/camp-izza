@@ -173,7 +173,7 @@ app.post("/sendConfirmEmail", (req, res) => {
   Please feel free to get in touch with us at youthspiritualsummit@gmail.com if you are encountering any issues.</p>
   <p>Warm Regards,</p>
   <p>The Youth Spiritual Summit Registration Team</p>
-  <a href="http://localhost:3000"><img width="200px" src="cid:logo"></a>`
+  <a href="https://youthspiritualsummit.weebly.com/"><img width="200px" src="cid:logo"></a>`
   const emailSubject = "Youth Spiritual Summit Account Registration"
 
   mail.authorize().then((auth) => {
@@ -325,6 +325,10 @@ app.post('/checkEmail', (req, res) => {
 
 app.get("/api", (req, res) => {
   res.json({ message: "Hello from server!" });
+});
+
+app.get("/", (req, res) => {
+  res.send("Path does not exist");
 });
 
 app.listen(PORT, () => {
