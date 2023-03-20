@@ -265,14 +265,12 @@ app.post("/financial_aid", (req) => {
   );
 })
 
-app.post("/payment", (req, res) => {
+app.post("/getBalance", (req, res) => {
   const parent_id = req.body.parent_id
-  db.query("SELECT * FROM parents WHERE parent_id =?",[parent_id], function (err, result3) {
+  db.query("SELECT * FROM parents WHERE parent_id =?",[parent_id], function (err, result) {
     if (err) throw err;
-    //console.log(result3[0])
-    res.send({parent: result3[0]})
-    // const balance = result3[0].balance;
-    // res.send({ balance });
+    if (result.length > 0) res.send({balance: result[0].balance})
+    else { res.send ({balance: 0})}
   });
 })
 
