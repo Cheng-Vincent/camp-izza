@@ -32,6 +32,7 @@ const ParentDashboard = () => {
     axios
       .post("api/parentdashboard", { parent_id: parentID })
       .then((response) => {
+        console.log(response);
         setYouthInfo(response.data.youthInfo);
         setBalance(": $" + response.data.balance);
         setParentFormSubmitted(response.data.parentDetailsCompleted);
