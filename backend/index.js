@@ -165,6 +165,7 @@ app.post("/api/login", (req, res) => {
             auth: true,
             token: jwtToken,
             account_type: result[0].account_type,
+            session: req.session.user
           });
         } else {
           res.send({

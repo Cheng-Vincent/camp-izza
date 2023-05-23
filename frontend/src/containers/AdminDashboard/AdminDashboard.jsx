@@ -22,7 +22,6 @@ const AdminDashboard = () => {
 
   useEffect(() => {
     // checks if user is logged in
-    console.log(process.env.REACT_APP_YSS_BACKEND_SERVER)
     Axios.get(process.env.REACT_APP_YSS_BACKEND_SERVER + "/login").then(
       (response) => {
         console.log(response)
