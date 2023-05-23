@@ -44,7 +44,7 @@ const LoginForm = () => {
           console.log(res)
           localStorage.setItem("token", res.data.token);
           localStorage.setItem("account_type", res.data.account_type);
-          // navigate("/" + res.data.account_type);
+          navigate("/" + res.data.account_type);
         }
       });
   };

@@ -136,7 +136,7 @@ app.get("/api/login", (req, res) => {
       user: req.session.user,
     });
   } else {
-    res.send({ loggedIn: false });
+    res.send({ loggedIn: false, session: req.session.user });
   }
 });
 
