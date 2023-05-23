@@ -21,7 +21,7 @@ const app = express();
 app.use(express.json());
 app.use(
   cors({
-    origin: ["https://yssmysql.wl.r.appspot.com/", "http://localhost:3000"],
+    origin: ["https://yssmysql.wl.r.appspot.com/", "http://localhost:3000", "https://youthspiritualsummit.netlify.app"],
     methods: ["GET", "POST", "DELETE", "PUT"],
     credentials: true,
   })
@@ -537,7 +537,7 @@ app.post("/api/youthdashboard", (req, res) => {
   let youth_groups = {};
   db.query(
     "SELECT accounts.first_name, accounts.last_name, accounts.email, youth.* " +
-      "FROM accounts INNER JOIN youth ON accounts.id = youth.youth_id WHERE accounts.id = ?",
+    "FROM accounts INNER JOIN youth ON accounts.id = youth.youth_id WHERE accounts.id = ?",
     [youth_id],
     (err, result) => {
       if (err) console.log(err);
@@ -552,13 +552,13 @@ app.post("/api/youthdashboard", (req, res) => {
           if (result2 && result2.length > 0) {
             db.query(
               "SELECT buses.id as b_id, buses.name as bus, buses.capacity as b_capacity, buses.count as b_count, " +
-                "families.id as f_id, families.name as family, families.capacity as f_capacity, families.grade as f_grade, families.count as f_count, " +
-                "cabins.id as c_id, cabins.name as cabin, cabins.capacity as c_capacity, cabins.gender as c_gender, cabins.count as c_count " +
-                "FROM (((youth_groups " +
-                "INNER JOIN buses ON youth_groups.bus_id = buses.id) " +
-                "INNER JOIN families ON youth_groups.family_id = families.id) " +
-                "INNER JOIN cabins ON youth_groups.cabin_id = cabins.id) " +
-                "WHERE youth_groups.bus_id=? AND youth_groups.family_id=? AND youth_groups.cabin_id=?;",
+              "families.id as f_id, families.name as family, families.capacity as f_capacity, families.grade as f_grade, families.count as f_count, " +
+              "cabins.id as c_id, cabins.name as cabin, cabins.capacity as c_capacity, cabins.gender as c_gender, cabins.count as c_count " +
+              "FROM (((youth_groups " +
+              "INNER JOIN buses ON youth_groups.bus_id = buses.id) " +
+              "INNER JOIN families ON youth_groups.family_id = families.id) " +
+              "INNER JOIN cabins ON youth_groups.cabin_id = cabins.id) " +
+              "WHERE youth_groups.bus_id=? AND youth_groups.family_id=? AND youth_groups.cabin_id=?;",
               [result2[0].bus_id, result2[0].family_id, result2[0].cabin_id],
               (err3, result3) => {
                 if (err3) console.log(err3);
@@ -585,8 +585,8 @@ app.post("/api/groupRosters", (req, res) => {
 
   db.query(
     "SELECT CONCAT_WS(' ', first_name, last_name) as youth_name " +
-      "FROM accounts WHERE accounts.id IN " +
-      "(SELECT youth_groups.youth_id FROM youth_groups WHERE youth_groups.bus_id = ?);",
+    "FROM accounts WHERE accounts.id IN " +
+    "(SELECT youth_groups.youth_id FROM youth_groups WHERE youth_groups.bus_id = ?);",
     [bus_id],
     (err, result) => {
       if (err) console.log(err);
@@ -595,8 +595,8 @@ app.post("/api/groupRosters", (req, res) => {
       }
       db.query(
         "SELECT CONCAT_WS(' ', first_name, last_name) as youth_name " +
-          "FROM accounts WHERE accounts.id IN " +
-          "(SELECT youth_groups.youth_id FROM youth_groups WHERE youth_groups.family_id = ?);",
+        "FROM accounts WHERE accounts.id IN " +
+        "(SELECT youth_groups.youth_id FROM youth_groups WHERE youth_groups.family_id = ?);",
         [family_id],
         (err2, result2) => {
           if (err2) console.log(err2);
@@ -605,8 +605,8 @@ app.post("/api/groupRosters", (req, res) => {
           }
           db.query(
             "SELECT CONCAT_WS(' ', first_name, last_name) as youth_name " +
-              "FROM accounts WHERE accounts.id IN " +
-              "(SELECT youth_groups.youth_id FROM youth_groups WHERE youth_groups.cabin_id = ?);",
+            "FROM accounts WHERE accounts.id IN " +
+            "(SELECT youth_groups.youth_id FROM youth_groups WHERE youth_groups.cabin_id = ?);",
             [cabin_id],
             (err3, result3) => {
               if (err3) console.log(err3);
@@ -813,8 +813,8 @@ app.post("/api/groupdisplay", (req, res) => {
   const busListPromise = new Promise((resolve, reject) => {
     db.query(
       "SELECT DISTINCT bus_id, capacity " +
-        "FROM youth_groups " +
-        "INNER JOIN buses ON id = youth_groups.bus_id ",
+      "FROM youth_groups " +
+      "INNER JOIN buses ON id = youth_groups.bus_id ",
       (err, busIdsResult) => {
         if (err) {
           console.log(err);
