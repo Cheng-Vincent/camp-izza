@@ -24,6 +24,7 @@ const AdminDashboard = () => {
     // checks if user is logged in
     Axios.get(process.env.REACT_APP_YSS_BACKEND_SERVER + "/login").then(
       (response) => {
+        console.log(response)
         if (response.data.loggedIn) {
           if (response.data.user.account_type === "admin")
             setAdminID(response.data.user.user_id);
