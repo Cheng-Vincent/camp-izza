@@ -1,13 +1,8 @@
-
-
 .login-container {
     background-color: #e2e4ee;
     padding: 5%;
-    margin-left: auto;
-    margin-right: auto;
-    border-radius: 1%;
+    border-radius: 15px;
     align-items: center;
-    /*display: flex;*/
 }
 
 .logo-col {
@@ -22,16 +17,4 @@
     color: red;
 }
 
-
-.login-button {
-    background-color: #4a5994;
-    color: white;
-}
-
-.register-button {
-    background-color: white;
-    color: #4a5994;
-    --bs-btn-hover-color: #4a5994;
-    --bs-btn-hover-bg: white;
-}
 

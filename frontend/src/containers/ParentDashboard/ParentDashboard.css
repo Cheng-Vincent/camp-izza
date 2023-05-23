@@ -1,7 +1,3 @@
-* {
-  font-family: 'Poppins', sans-serif;
-}
-
 html, body {
   height: 100%;
 }
@@ -21,8 +17,17 @@ footer {
   width: 100%;
 }
 
-/*.logo {
-    width: 100px;
-    height: 75px;
-    object-fit: scale-down;
-}*/
+.title{
+  text-align:center;
+  padding-top: 20px;
+}
+
+.accordion{
+  border-color: black;
+  background-color: rgb(145, 145, 157);
+  margin: auto;
+}
+
+.debit-creditPayment{
+  text-align: left;
+}

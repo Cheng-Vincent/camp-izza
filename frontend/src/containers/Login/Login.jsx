@@ -5,7 +5,7 @@ import "./Login.css";
 
 const Login = () => {
   return (
-    <>
+    <body>
       <div className="container-lg login-container my-5">
         <div className="row">
           <div className="col-md-6 logo-col text-center">
@@ -22,7 +22,7 @@ const Login = () => {
           </div>
         </div>
       </div>
-    </>
+    </body>
   );
 };
 

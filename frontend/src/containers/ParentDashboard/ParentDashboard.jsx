@@ -2,7 +2,9 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
-import Footer from "../../components/Footer/Footer";
+import Stack from "react-bootstrap/Stack";
+import Row from "react-bootstrap/Row";
+import Col from "react-bootstrap/Col";
 import yss_logo_blue from "../../assets/yss-logo.png";
 import "./ParentDashboard.css";
 import axios from "axios";
@@ -10,34 +12,44 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 
 const ParentDashboard = () => {
-    const [youthInfo, setYouthInfo] = useState([]);
-    const [parentID, setParentID] = useState();// replace with actual parent id later
-    const [balance, setBalance] = useState("");
-    const [parentFormSubmitted, setParentFormSubmitted] = useState(false);
-    const navigate = useNavigate();
-    const [balanceStyle, setBalanceStyle] = useState("btn btn-primary mb-3");
+  const [youthInfo, setYouthInfo] = useState([]);
+  const [parentID, setParentID] = useState();
+  const [balance, setBalance] = useState("");
+  const [parentFormSubmitted, setParentFormSubmitted] = useState(false);
+  const [payButton, setPayButton] = useState("btn btn-primary mb-3");
+  const [fAidSubmitted, setFAid] = useState(false);
+  const navigate = useNavigate();
 
   useEffect(() => {
     // checks if user is logged in
-    axios.get("api/login").then((response) => {
-      if (response.data.loggedIn) {
-        setParentID(response.data.user.user_id);
-      } else {
-        navigate("/login");
-      }
-    });
+    axios
+      .get(process.env.REACT_APP_YSS_BACKEND_SERVER + "/login")
+      .then((response) => {
+        if (response.data.loggedIn) {
+          if (response.data.user.account_type === "parent")
+            setParentID(response.data.user.user_id);
+          else {
+            navigate(`/${response.data.user.account_type}`);
+          }
+        } else {
+          navigate("/login");
+        }
+      });
   }, []);
 
   useEffect(() => {
     axios
-      .post("api/parentdashboard", { parent_id: parentID })
+      .post(process.env.REACT_APP_YSS_BACKEND_SERVER + "/parentdashboard", {
+        parent_id: parentID,
+      })
       .then((response) => {
-        console.log(response);
         setYouthInfo(response.data.youthInfo);
         setBalance(": $" + response.data.balance);
         setParentFormSubmitted(response.data.parentDetailsCompleted);
-        if (response.data.balance == 0) setBalanceStyle("btn btn-primary mb-3 disabled")
-        else setBalanceStyle("btn btn-primary mb-3");
+        setFAid(response.data.financialAid);
+        if (response.data.balance == 0)
+          setPayButton("btn btn-primary mb-3 disabled");
+        else setPayButton("btn btn-primary mb-3");
       });
   }, [parentID]);
 
@@ -52,7 +64,7 @@ const ParentDashboard = () => {
     <div>
       <div className="container p-5">
         <div style={{ textAlign: "center" }}>
-          <a href="/parentdashboard">
+          <a href="/parent">
             <img
               className="col"
               class="logo"
@@ -127,10 +139,17 @@ const ParentDashboard = () => {
 
         {/*I want to keep this for now */}
         <Card className="mb-4 mx-auto">
-              <Card.Body>
-                <Card.Title>Complete Parent/Guardian Details Form</Card.Title>
-                <Button variant="danger" type="link" href="parentdetails" disabled={parentFormSubmitted}>Submit</Button>
-              </Card.Body>
+          <Card.Body>
+            <Card.Title>Complete Parent/Guardian Details Form</Card.Title>
+            <Button
+              variant="danger"
+              type="link"
+              href="/parent/detailsform"
+              disabled={parentFormSubmitted}
+            >
+              Submit
+            </Button>
+          </Card.Body>
         </Card>
 
         <div className="card w-auto mb-4 ">
@@ -139,7 +158,7 @@ const ParentDashboard = () => {
           </div>
 
           <div className="card-body">
-            <a href="/youth" className="btn btn-primary mb-3">
+            <a href="/parent/youthapplication" className="btn btn-primary mb-3">
               Add Youth
             </a>
 
@@ -180,15 +199,26 @@ const ParentDashboard = () => {
           </div>
 
           <div className="card-body">
-            <a href="/payment" className={balanceStyle}>
-              Pay Now
-            </a>
-            <h4 className="text-center"> Balance Due {balance} </h4>
+            <Row className="mx-auto mb-4">
+              <h4 className="text-center"> Balance Due {balance} </h4>
+            </Row>
+            <Row className="mx-auto mb-4">
+              <Stack gap={2}>
+                <Button href="/parent/payment" className={payButton}>
+                  Pay Now
+                </Button>
+                <Button
+                  href="/parent/financialaid"
+                  disabled={fAidSubmitted | (balance === 0)}
+                  className="btn"
+                >
+                  Financial Aid Form
+                </Button>
+              </Stack>
+            </Row>
           </div>
         </div>
       </div>
-
-      <Footer />
     </div>
   );
 };

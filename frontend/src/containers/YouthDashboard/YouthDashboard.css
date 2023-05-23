@@ -1,0 +1,57 @@
+.dashboard-card {
+    box-shadow: 0px 0px 3px #9a9ca2;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.dashboard-container {
+    background-color: #e2e4ee;
+    padding: 3%;
+    align-items: center;
+    border-radius: 10px;
+    box-shadow: 0px 0px 3px #9a9ca2;
+}
+
+#about-widget {
+    border-radius: 20px;
+}
+#account-widget {
+    border-radius: 20px;
+}
+#choose-widget {
+    border-radius: 20px;
+}
+#schedule-widget {
+    border-radius: 20px;
+}
+#groups-widget {
+    border-radius: 20px;
+}
+#survey-widget {
+    border-radius: 20px;
+}
+
+.nav {
+    display: flex;
+    align-items: flex-end;
+}
+
+.group-card {
+    padding: 3%;
+}
+
+Col {
+    align-items: center;
+}
+
+.profile-btn {
+    border-radius: 10px;
+    padding: 1px;
+    border-style: none;
+    align-items: center;
+    background-color: #e2e4ee;
+}
+
+.tab-content {
+  margin-bottom: 20px;
+}

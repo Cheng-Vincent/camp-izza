@@ -12,7 +12,6 @@ const SCOPES = ['https://mail.google.com/'];
 // time.
 const TOKEN_PATH = path.join(process.cwd(), 'token.json');
 const CREDENTIALS_PATH = path.join(process.cwd(), 'credentials.json');
-const DATE_REFRESH = path.join(process.cwd(), 'dateForRefreshToken.json');
 
 /**
  * Reads previously authorized credentials from the save file.
@@ -48,19 +47,6 @@ async function saveCredentials(client) {
     await fs.writeFile(TOKEN_PATH, payload);
 }
 
-async function saveDate(){
-    const today = new Date()
-    try{
-        const date = await fs.readFile(DATE_REFRESH);
-    }
-    catch{
-        const payload = JSON.stringify({
-            date_last_refreshed: today
-        });
-        await fs.writeFile(DATE_REFRESH, payload);
-    }
-}
-
 /**
  * Load or request or authorization to call APIs.
  *
@@ -68,14 +54,8 @@ async function saveDate(){
 async function authorize() {
     let client = await loadSavedCredentialsIfExist();
     if (client) {
+        // console.log(client)
         return client;
-    }
-    var currentDate = new Date()
-    const content = await fs.readFile(DATE_REFRESH);
-    const dateRefreshed = JSON.parse(content)
-    const days_since_last_refrehsed = (currentDate.getTime() - dateRefreshed.date_last_refreshed)/ (1000*3600*24)
-    if(days_since_last_refrehsed > 7){
-        await saveDate()
     }
     client = await authenticate({
         scopes: SCOPES,
@@ -101,7 +81,7 @@ async function emailYouth(auth, emailTo, emailSubect, emailBody) {
         html: emailBody,
         attachments: [{
             filename: 'logo.png',
-            path: './asset/yss-logo.png',
+            path: './assets/yss-logo.png',
             cid: 'logo'
         }],
         textEncoding: 'base64',
