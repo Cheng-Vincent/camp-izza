@@ -31,7 +31,7 @@ const AdminDashboard = () => {
             navigate(`/${response.data.user.account_type}`);
           }
         } else {
-          navigate("/login");
+          // navigate("/login");
         }
       }
     );
